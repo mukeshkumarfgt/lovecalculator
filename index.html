@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+    }
+    .container {
+        max-width: 300px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        text-align: center;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    input[type="text"] {
+        width: 95%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 50px;
+    }
+    button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+    }
+    #result {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Love Calculator</h1>
+    <form id="loveForm">
+        <label for="yourName">Your Name:</label>
+        <input type="text" id="yourName" name="yourName" required>
+        <label for="partnerName">Partner's Name:</label>
+        <input type="text" id="partnerName" name="partnerName" required>
+        <button type="submit">Calculate</button>
+    </form>
+    <div id="result"></div>
+</div>
+
+<script>
+    document.getElementById('loveForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        var yourName = document.getElementById('yourName').value.trim().toLowerCase();
+        var partnerName = document.getElementById('partnerName').value.trim().toLowerCase();
+
+        if (yourName === '' || partnerName === '') {
+            alert('Please enter both names.');
+            return;
+        }
+
+        var loveScore = calculateLoveScore(yourName, partnerName);
+        displayResult(loveScore);
+    });
+
+    function calculateLoveScore(name1, name2) {
+        var combinedName = name1 + name2;
+        var score = 0;
+
+        for (var i = 0; i < combinedName.length; i++) {
+            score += combinedName.charCodeAt(i);
+        }
+
+        return score % 101;
+    }
+
+    function displayResult(score) {
+        var resultElement = document.getElementById('result');
+        resultElement.textContent = 'Love Score: ' + score + '%';
+    }
+</script>
+</body>
+</html>
